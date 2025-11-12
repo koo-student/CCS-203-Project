@@ -10,24 +10,28 @@ title proj.asm
     max_width dw ?
     max_height dw ?
     users_fn db "Kenneth", 0dh, 0ah
-             db "user2", 0dh, 0ah
-             db "user3", 0dh, 0ah
-             db "user4", 0dh, 0ah
+             db "Dwight", 0dh, 0ah
+             db "Kassidy Glean", 0dh, 0ah
+             db "Guy Ivan", 0dh, 0ah
+             db "Sem Justine", 0dh, 0ah
              db 0
     users_ln db "Arias", 0dh, 0ah
-             db "user2", 0dh, 0ah
-             db "user3", 0dh, 0ah
-             db "user4", 0dh, 0ah
+             db "Casanas", 0dh, 0ah
+             db "Javier", 0dh, 0ah
+             db "Pajo", 0dh, 0ah
+             db "Uy", 0dh, 0ah
              db 0
     users_mn db "Bocatija", 0dh, 0ah
-             db "user2", 0dh, 0ah
-             db "user3", 0dh, 0ah
+             db "Emralino", 0dh, 0ah
+             db "Mendez", 0dh, 0ah
              db "user4", 0dh, 0ah
+             db "Medina", 0dh, 0ah
              db 0
     users_sn db "2011674", 0dh, 0ah
-             db "user2", 0dh, 0ah
-             db "user3", 0dh, 0ah
+             db "2420064", 0dh, 0ah
+             db "2410735", 0dh, 0ah
              db "user4", 0dh, 0ah
+             db "2411308", 0dh, 0ah
              db 0
 .code
     FillQ1 proc
@@ -112,7 +116,11 @@ title proj.asm
         xor ah,ah
         div bl ; Cell's row = pixel's row/8
         mov dh, al
+        cmp ah, 0
+        je skip_row
         inc dh
+        jmp skip_row
+        skip_row:
         mov al, byte ptr [min_width] ; Start of the column pixel
         xor ah,ah
         div bl ; Cell's column = pixel's column/8
@@ -143,7 +151,7 @@ title proj.asm
     write_lf:
         inc dh ; Go to the next row
         xor ax, ax
-        mov bl, 8 ; Do calculatiuon for column
+        mov bl, 8 ; Do calculation for column
         mov al, byte ptr [min_width] ; Reset column (because carriage)
         div bl
         mov dl, al
